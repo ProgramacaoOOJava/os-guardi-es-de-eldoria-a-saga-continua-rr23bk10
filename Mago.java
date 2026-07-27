@@ -1,23 +1,35 @@
 package eldoria;
 
-/**
- * Classe que representa um Mago no reino de Eldoria.
- */
-public class Mago extends Personagem {
+import java.util.ArrayList;
 
-    /**
-     * Construtor do Mago.
-     */
+public class Mago extends Personagem implements Auditavel {
+
+    private ArrayList<String> acoes = new ArrayList<>();
+
     public Mago(String nome, int nivel, int pontosDeVida, double poderBase) {
         super(nome, "Mago", nivel, pontosDeVida, poderBase);
     }
 
-    /**
-     * Habilidade específica do Mago.
-     */
     @Override
     public void usarHabilidade() {
-        System.out.println("Habilidade: " + getNome()
-                + " conjura uma poderosa bola de fogo!");
+        System.out.println("Habilidade: "
+                + getNome()
+                + " conjura uma bola de fogo!");
     }
+
+    @Override
+    public void registrarAcao(String acao) {
+        acoes.add(acao);
+    }
+
+    @Override
+    public void auditarAcoes() {
+
+        System.out.println("Ações auditadas:");
+
+        for (String acao : acoes) {
+            System.out.println("- " + acao);
+        }
+    }
+
 }
