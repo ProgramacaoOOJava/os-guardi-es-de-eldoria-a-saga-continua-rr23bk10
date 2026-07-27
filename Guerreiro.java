@@ -17,7 +17,7 @@ public class Guerreiro extends Personagem {
      */
     @Override
     public void usarHabilidade() {
-        System.out.println("Habilidade: " + getNome() +
-                " desfere um golpe poderoso com sua espada!");
+        System.out.println("Habilidade: " + getNome()
+                + " desfere um golpe poderoso com sua espada!");
     }
 }

@@ -4,11 +4,10 @@ import java.util.Objects;
 
 /**
  * Classe base para representar personagens do reino de Eldoria.
- * Aplica conceitos de encapsulamento, herança e polimorfismo.
  */
 public abstract class Personagem {
 
-    // Atributos privados (encapsulamento)
+    // Atributos encapsulados
     private String nome;
     private String classe;
     private int nivel;
@@ -16,14 +15,15 @@ public abstract class Personagem {
     private double poderBase;
 
     /**
-     * Construtor que inicializa todos os atributos do personagem.
+     * Construtor
      */
     public Personagem(String nome, String classe, int nivel,
-                       int pontosDeVida, double poderBase) {
+                      int pontosDeVida, double poderBase) {
+
         this.nome = nome;
         this.classe = classe;
-        this.nivel = nivel;
-        this.pontosDeVida = pontosDeVida;
+        setNivel(nivel);
+        setPontosDeVida(pontosDeVida);
         this.poderBase = poderBase;
     }
 
@@ -49,46 +49,66 @@ public abstract class Personagem {
     }
 
     // Setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
+    public void setNivel(int nivel) {
+        if (nivel >= 0) {
+            this.nivel = nivel;
+        }
+    }
+
     public void setPontosDeVida(int pontosDeVida) {
-        this.pontosDeVida = pontosDeVida;
+        if (pontosDeVida >= 0) {
+            this.pontosDeVida = pontosDeVida;
+        }
+    }
+
+    public void setPoderBase(double poderBase) {
+        this.poderBase = poderBase;
     }
 
     /**
-     * Método abstrato que será implementado pelas subclasses.
+     * Método abstrato.
      */
     public abstract void usarHabilidade();
 
     /**
-     * Exibe os dados do personagem.
+     * Exibe o status usando o toString().
      */
     public void exibirStatus() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Classe: " + classe);
-        System.out.println("Nível: " + nivel);
-        System.out.println("Pontos de Vida: " + pontosDeVida);
-        System.out.println("Poder Base: " + poderBase);
+        System.out.println(this);
     }
 
     @Override
     public String toString() {
-        return "Personagem{" +
-                "nome='" + nome + '\'' +
-                ", classe='" + classe + '\'' +
-                ", nivel=" + nivel +
-                ", pontosDeVida=" + pontosDeVida +
-                ", poderBase=" + poderBase +
-                '}';
+        return "Nome: " + nome +
+                "\nClasse: " + classe +
+                "\nNível: " + nivel +
+                "\nPontos de Vida: " + pontosDeVida +
+                "\nPoder Base: " + poderBase;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Personagem)) return false;
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Personagem)) {
+            return false;
+        }
 
         Personagem outro = (Personagem) obj;
 
-        return Objects.equals(nome, outro.nome) &&
-               Objects.equals(classe, outro.classe);
+        return Objects.equals(nome, outro.nome)
+                && Objects.equals(classe, outro.classe);
     }
 
     @Override
